@@ -117,6 +117,3 @@ def run(filename):
     Raytracer.write(filename)
     im = Image.open(filename)
     im.show()
-
-
-# run("Osito.bmp")

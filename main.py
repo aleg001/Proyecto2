@@ -27,7 +27,7 @@ def bye():
     print("¡Gracias por usar el programa!!")
 
 
-Bienvenida = "\n----- RT Library----\n"
+Bienvenida = "\n----- Raytracing Library----\n"
 procesando = "Procesando solicitud..."
 
 

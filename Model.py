@@ -10,10 +10,6 @@ def ProductoCruz(primerValor, segundoValor):
     )
 
 
-def subtract(a, b):
-    return [a[i] - b[i] for i in range(min(len(a), len(b)))]
-
-
 def CoordenadasBari(A, B, C, P):
     cx, cy, cz = ProductoCruz(
         V3(B.x - A.x, C.x - A.x, A.x - P.x), V3(B.y - A.y, C.y - A.y, A.y - P.y)
@@ -26,45 +22,6 @@ def CoordenadasBari(A, B, C, P):
     w = 1 - sumaTemp
 
     return (w, v, u)
-
-
-"""
-Class made to open an object from a file
-"""
-
-
-class ObjectOpener:
-    def __init__(self, filename):
-        with open(filename, "r") as file:
-            self.lines = file.read().splitlines()
-        self.vertices = []
-        self.texcoords = []
-        self.normals = []
-        self.faces = []
-        self.glLines1()
-
-    def glLines1(self):
-        for line in self.lines:
-            try:
-                prefix, value = line.split(" ", 1)
-            except:
-                continue
-            if prefix == "v":
-                self.vertices.append(list(map(float, value.split(" "))))
-            elif prefix == "vt":
-                self.texcoords.append(list(map(float, value.split(" "))))
-
-            elif prefix == "f":
-                self.faces.append(
-                    [list(map(int, vert.split("/"))) for vert in value.split(" ")]
-                )
-
-
-class InterseccionXD:
-    def __init__(self, distance, point, normal):
-        self.distance = distance
-        self.point = point
-        self.normal = normal
 
 
 class Sphere(object):
@@ -383,3 +340,42 @@ def Refracciones(I, N, roiValue):
     valueEt2 = 1 - valueEt**2 * (1 - factorIN**2)
     if valueEt2 < 0:
         return V3(0, 0, 0)
+
+
+class InterseccionXD:
+    def __init__(self, distance, point, normal):
+        self.distance = distance
+        self.point = point
+        self.normal = normal
+
+
+"""
+Class made to open an object from a file
+"""
+
+
+class ObjectOpener:
+    def __init__(self, filename):
+        with open(filename, "r") as file:
+            self.lines = file.read().splitlines()
+        self.vertices = []
+        self.texcoords = []
+        self.normals = []
+        self.faces = []
+        self.glLines1()
+
+    def glLines1(self):
+        for line in self.lines:
+            try:
+                prefix, value = line.split(" ", 1)
+            except:
+                continue
+            if prefix == "v":
+                self.vertices.append(list(map(float, value.split(" "))))
+            elif prefix == "vt":
+                self.texcoords.append(list(map(float, value.split(" "))))
+
+            elif prefix == "f":
+                self.faces.append(
+                    [list(map(int, vert.split("/"))) for vert in value.split(" ")]
+                )
